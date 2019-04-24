@@ -8,10 +8,11 @@ $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
 $channel = $connection->channel();
 $channel->queue_declare('helloQueue');
 
-$msg = new AMQPMessage('Hello World2!');
+$msgBody = 'Hello World!';
+$msg = new AMQPMessage($msgBody);
 $channel->basic_publish($msg, '', 'helloQueue');
 
-echo "[x] Sent 'Hello world'<br>";
+echo "[x] Sent '$msgBody'<br>";
 
 $channel->close();
 $connection->close();
